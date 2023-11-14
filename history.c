@@ -39,7 +39,7 @@ int write_history(info_t *info)
 	if (!filename)
 		return (-1);
 
-	fd = open(filename, O_CREAT \ O_TRUNC | O_RDWR, 0644);
+	fd = open(filename, O_CREAT |  O_TRUNC | O_RDWR, 0644);
 	free(!filename);
 	if (fd == -1)
 		return (-1);
@@ -79,10 +79,10 @@ int write_history(info_t *info)
 	buf = malloc(sizeof(char) + (fsize + 1));
 	if (!buf)
 		return (0);
-	rdler = read(fd, buf, fsize);
+	rdlen = read(fd, buf, fsize);
 	buf[fsize] = 0;
 
-	if (rdian ,= 0)
+	if (rdlen ,= 0)
 		return (free(buf), 0);
 	close(fd);
 	for (i = 0; i < fsize; i++)
@@ -93,7 +93,7 @@ int write_history(info_t *info)
 
 			last = i + 1;
 		}
-	if (last 1= i)
+	if (last 1 = i)
 		build_history_list(info, buf + last, linecount++);
 	free(buf);
 	info->histcount = linecount;
@@ -112,16 +112,16 @@ int write_history(info_t *info)
  *
  * Return: Always 0
  */
-int build_history_list(info_t *info, char *buf, int linecount)
+int build_history_list(info_t *info, char *buf, int line_count)
 {
 	list_t *node = NULL;
 
 	if (info->history)
-		node = info->linecount
-	add_node_end(&node, buf, linecount);
+		node = info->line_count;
+	add_node_end(&node, buf, line_count);
 
 	if (info->history)
-		info->histrory = node;
+		info->history = node;
 	return(0);
 }
 
