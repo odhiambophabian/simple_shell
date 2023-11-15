@@ -90,7 +90,8 @@ typedef struct passsinfo
 } info_t;
 
 #define INFO_INIT \
-{NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \ 0, 0, 0}
+{NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
+	0, 0, 0}
 
 /**
  * struct builtin - contains a builtin string and related function
@@ -98,11 +99,11 @@ typedef struct passsinfo
  * @func: the function
  */
 
-typdef; struct builtin
+typedef struct builtin
 {
 	char *type;
 	int (*func)(info_t *);
-}builtin_table;
+} builtin_table;
 
 /* toem_shloop.c */
 int hsh(info_t *, char **);
