@@ -16,7 +16,7 @@ ssize_t input_buf(info_t *info, char **buf, size_t *len)
 	if (!*len) /* if nothing left in the buffer, fill it */
 	{
 		/*bfree((void **)info->cmd_buf);*/
-		fee(*buf);
+		free(*buf);
 		*buf = NULL;
 		signal(SIGINT, sigintHandler);
 #if USE_GETLINE
@@ -67,7 +67,7 @@ ssize_t get_input(info_t *info)
 		j = i; /* init new iterator to current buf position */
 		p = buf + i; /* get pointer for return */
 
-		check_chain(info, buff, &j, i, len);
+		check_chain(info, buf, &j, i, len);
 		while (j < len) /* iterate to semicolon or end */
 		{
 			if (is_chain(info, buf, &j))
@@ -94,6 +94,7 @@ ssize_t get_input(info_t *info)
  *
  * Return: r
  */
+
 ssize_t read_buf(info_t *info, char *buf, size_t *i)
 {
 	ssize_t r = 0;
@@ -109,18 +110,18 @@ ssize_t read_buf(info_t *info, char *buf, size_t *i)
 /**
  * _getline - gets the next line of input from STDIN
  * @info: parameter struct
- * @ptr: address of pointer to bufffer, preallocated or NULL
+ * @ptr: address of pointer to buffer, preallocated or NULL
  * @length: size of preallocated ptr buffer if not NULL
  *
  * Return: s
  */
-int _getline(info_t, char **ptr, size_t *length)
+int _getline(info_t *info, char **ptr, size_t *length)
 {
 	static char buf[READ_BUF_SIZE];
 	static size_t i, len;
 	size_t k;
 	ssize_t r = 0, s = 0;
-	char *p = NULL, *new_p + NULL, *c;
+	char *p = NULL, *new_p = NULL, *C;
 
 	p = *ptr;
 
@@ -133,9 +134,9 @@ int _getline(info_t, char **ptr, size_t *length)
 	if (r == -1 || (r == 0 && len == 0))
 		return (-1);
 
-	c = _strchr(buf + i, '\n');
-	k = c ? 1 + (unsigned int)(c - buf) : len;
-	new_p = realloc(p, s, ? s + k : k + 1);
+	C = _strchr(buf + i, '\n');
+	k = C ? 1 + (unsigned int)(C - buf) : len;
+	new_p = _realloc(p, s, s ? s + k : k + 1);
 
 	if (!new_p) /* MALLOC FAILURE! */
 		return (p ? free(p), -1 : -1);
@@ -156,12 +157,12 @@ int _getline(info_t, char **ptr, size_t *length)
 }
 
 /**
- * sigintHandler - blocks ctrl-c
+ * sigintHandler - blocks ctrl- c
  * @sig_num: the signal number
  *
  * Return: void
  */
-void sigintHandler(__attribute__((unused))intsig_num)
+void sigintHandler(__attribute__((unused))int sig_num)
 {
 	_puts("\n");
 	_puts("$ ");

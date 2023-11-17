@@ -2,7 +2,8 @@
 
 /**
  * get_environ - returns the string array copy of our environ
- * @info: structure containing potential arguments. Used to maintain a constant function prototype
+ * @info: structure containing potential arguments. Used to maintain a constant function prototype.
+ *
  * Return: Always 0
  */
 char **get_environ(info_t *info)
